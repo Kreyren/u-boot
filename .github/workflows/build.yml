@@ -1,0 +1,24 @@
+name: Build U-Boot on Tag
+
+on:
+  push:
+    tags:
+      - 'v*' # Trigger only for tags starting with 'v'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup latest Alpine Linux
+        uses: jirutka/setup-alpine@v1
+        with:
+          arch: aarch64
+          branch: v3.18
+          packages: >
+            build-base
+    
+      - name: Run script inside Alpine chroot with aarch64 emulation
+        run: uname -m
+        shell: alpine.sh {0}
