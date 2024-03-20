@@ -4,6 +4,7 @@
 	inputs = {
 		# Release inputs
 		nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+		nixpkgs-staging-next.url = "github:nixos/nixpkgs/staging-next";
 		nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 		nixpkgs-kreyren-crust.url = "github:kreyren/nixpkgs/crust";
 
@@ -16,8 +17,6 @@
 	outputs = inputs @ { self, ... }:
 		inputs.flake-parts.lib.mkFlake { inherit inputs; } {
 			imports = [
-				./nix/lib/buildUboot
-
 				inputs.flake-root.flakeModule
 				inputs.mission-control.flakeModule
 			];
@@ -93,18 +92,15 @@
 
 					# Environmental Variables
 					# NAME = "value";
-					BL31 = "${inputs.nixpkgs.legacyPackages.aarch64-linux.armTrustedFirmwareAllwinner}/bl31.bin";
-					# FIXME(Krey): Figure out how to manage this scenario where we are on x86_64-linux system and want to cross compile crust
-					SCP = "${inputs.nixpkgs-kreyren-crust.legacyPackages.x86_64-linux.pkgsCross.or1k.crustOlimexA64Teres1}/scp.bin";
 				};
 
 				formatter = inputs.nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
 
 				packages = {
-					ubootOlimexA64Teres1 = self.nixosModules.buildUBoot {
+					ubootOlimexA64Teres1 = inputs.nixpkgs-staging-next.legacyPackages.${system}.buildUBoot {
 						defconfig = "teres_i_defconfig";
 						extraMeta.platforms = ["aarch64-linux"];
-						BL31 = "${inputs.nixpkgs.legacyPackages.aarch64-linux.armTrustedFirmwareAllwinner}/bl31.bin";
+						BL31 = "${inputs.nixpkgs.legacyPackages.aarch64-linux.armTrustedFirmwareAllwinner}/bl31.bin"; # 2.10.0
 						SCP = "${inputs.nixpkgs-kreyren-crust.legacyPackages.${system}.pkgsCross.or1k.crustOlimexA64Teres1}/scp.bin";
 						filesToInstall = ["u-boot-sunxi-with-spl.bin"];
 					};

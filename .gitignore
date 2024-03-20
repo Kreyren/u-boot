@@ -134,4 +134,4 @@ generated_defconfig
 include/bmp_logo_data.h
 include/bmp_logo.h
 drivers/video/u_boot_logo.S
-result/
+*/result
