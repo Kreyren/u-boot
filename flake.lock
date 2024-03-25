@@ -64,6 +64,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-kreyren-atf-test": {
+      "locked": {
+        "lastModified": 1711400720,
+        "narHash": "sha256-+CxTepRlRP/X+72UEfocIwX+57j64/SFLS69+TiSjg4=",
+        "owner": "kreyren",
+        "repo": "nixpkgs",
+        "rev": "978d38f7cd35cfbdf7482f085be819b80b579623",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kreyren",
+        "ref": "atf-test",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-kreyren-crust": {
       "locked": {
         "lastModified": 1707153563,
@@ -136,6 +152,7 @@
         "flake-root": "flake-root",
         "mission-control": "mission-control",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-kreyren-atf-test": "nixpkgs-kreyren-atf-test",
         "nixpkgs-kreyren-crust": "nixpkgs-kreyren-crust",
         "nixpkgs-staging-next": "nixpkgs-staging-next",
         "nixpkgs-unstable": "nixpkgs-unstable"

@@ -6,7 +6,8 @@
 		nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
 		nixpkgs-staging-next.url = "github:nixos/nixpkgs/staging-next";
 		nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-		nixpkgs-kreyren-crust.url = "github:kreyren/nixpkgs/crust";
+    nixpkgs-kreyren-crust.url = "github:kreyren/nixpkgs/crust";
+    nixpkgs-kreyren-atf-test.url = "github:kreyren/nixpkgs/atf-test";
 
 		# Principle inputs
 		flake-parts.url = "github:hercules-ci/flake-parts";
@@ -100,7 +101,7 @@
 					ubootOlimexA64Teres1 = inputs.nixpkgs-staging-next.legacyPackages.${system}.buildUBoot {
 						defconfig = "teres_i_defconfig";
 						extraMeta.platforms = ["aarch64-linux"];
-						BL31 = "${inputs.nixpkgs.legacyPackages.aarch64-linux.armTrustedFirmwareAllwinner}/bl31.bin"; # 2.10.0
+						BL31 = "${inputs.nixpkgs-kreyren-atf-test.legacyPackages.aarch64-linux.armTrustedFirmwareAllwinner}/bl31.bin";
 						SCP = "${inputs.nixpkgs-kreyren-crust.legacyPackages.${system}.pkgsCross.or1k.crustOlimexA64Teres1}/scp.bin";
 						filesToInstall = ["u-boot-sunxi-with-spl.bin"];
 					};
